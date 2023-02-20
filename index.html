@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<script src='./script.js' defer></script>
+	<script src='./popupEngine.js'></script>
+	<script src="https://kit.fontawesome.com/7796cb6c97.js" crossorigin="anonymous"></script>
+	<link rel="icon" type="image/x-icon" href="./img/noun-dart-4554800.png">
+	<title>Document</title>
+</head>
+<body>
+	<main>
+		<div id="info">
+				<div>
+					<p>Score</p>
+					<p id="score"></p>
+				</div>
+
+				<div>
+					<input type="text" id="name" onchange="changeName()" onclick="this.select()">
+					<p id="step-back" onclick="stepBack()">One Score back</p>
+				</div>
+
+				<div>
+					<p>Average</p>
+					<p id="average"></p>
+				</div>
+		</div>
+
+		<div id="input"></div>
+
+		<div id="menu">
+				<div onclick="changeScore()"><i class="fa-solid fa-check"></i></div>
+				<div onclick="resetNumberTiles()"><i class="fa-solid fa-rotate"></i></div>
+				<div id="baseScore">
+					<input type="number" value="301" id="baseScoreInput" onchange="setBaseScore()">
+					<p onclick="resetPlayerScores()">reset all</p>
+				</div>
+				<div onclick="addPlayer()"><i class="fa-solid fa-user-plus"></i></div>
+				<div onclick="deletePlayer()"><i class="fa-solid fa-trash"></i></div>
+		</div>
+
+		<div id="players"></div>
+	</main>
+</body>
+</html>

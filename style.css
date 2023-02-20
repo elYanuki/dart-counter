@@ -1,0 +1,266 @@
+/**********Generell**********/
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+p{
+    color: var(--font-color-main);
+}
+
+img{
+    width:100%
+}
+
+input{
+    background-color: transparent;
+    border: none;
+    color: var(--font-color-main);
+}
+
+/**********Main Style**********/
+
+main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*---------Popup---------*/
+
+.popupEngineBody{
+    background-color: var(--fields-back);
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.popupEngineButton{
+    padding: .5rem;
+    background-color: var(--tile-back);
+    border-radius: .5rem;
+    color: white;
+}
+
+/*---------Info---------*/
+
+/* #region */
+
+#info{
+    padding-top: 0.5rem; padding-bottom: 0.5rem;
+    width: 100vw;
+    display: flex;
+    font-size: 2rem;
+    background-color: var(--menue-back)
+}
+
+#info input{
+    font-size: 1.5rem;
+    max-width: 30vw;
+    text-align: center;
+}
+
+#info div p:first-of-type{
+    font-size: 0.8rem;
+}
+
+#info div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#info div:nth-of-type(2){
+    width: 32vw;
+    justify-content: space-between;
+}
+
+#step-back{
+    font-size: 1rem !important;
+    text-align: center;
+}
+
+/* #endregion */
+
+/*---------input---------*/
+
+/* #region */
+
+#input{
+    height: 25rem;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6,1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    background-color: var(--fields-back);
+}
+
+.numberPanel{
+    background-color: var(--tile-back);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 1rem;
+}
+.numberPanel.selected{
+    background-color: var(--tile-accent);
+}
+
+.numberPanel p{
+    font-size: 1.3rem;
+}
+
+.counter{
+    position: absolute;
+    right: 6%;
+    bottom: 4%;
+    font-size: 1rem !important;
+    visibility: hidden;
+}
+.numberPanel.selected .counter{
+    visibility: visible;
+}
+
+#subtract-div{
+    grid-column-start: 4;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+#subtract-div p{
+    border: 0.1rem solid black;
+    border-radius: 50%;
+    padding: 0.3rem;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: rgb(139, 137, 151);;
+}
+
+/* #endregion */
+
+/*---------menu---------*/
+
+/* #region */
+
+#menu{
+    padding-top: 0.5rem; padding-bottom: 0.5rem;
+    width: 100vw;
+    display: flex;
+    background-color: var(--menue-back);
+    justify-content: space-evenly;
+    color: var(--font-color-main);
+}
+
+#menu div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    flex-grow: 1;
+    font-size: 1.5rem;
+}
+
+#baseScore{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    width: 35% !important;
+}
+
+#baseScoreInput{
+    font-size: 1.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    color: inherit;
+}
+
+#baseScore p{
+    font-size: 1rem;
+    text-align: center;
+    color: inherit;
+}
+
+/* #endregion */
+
+/*---------players---------*/
+
+/* #region */
+
+#players{
+    flex-grow: 1;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow: auto;
+    background-color: var(--fields-back);
+    padding: 0.2rem;
+    box-sizing: border-box;
+}
+
+.player{
+    background-color: var(--tile-back);
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    flex-direction: column;
+    border-radius: 1rem;
+    margin: 0.5rem;
+}
+.player.selected{
+    background-color: var(--tile-accent);
+}
+
+.player p{
+    color: inherit;
+}
+
+.player p:last-of-type{
+    font-size: 0.9rem;
+}
+
+/* #endregion */
+
+/**********Imports**********/
+
+/**********Keyframes**********/
+
+/**********Responsive**********/
+/* @media screen and (max-width: 1100px) {
+    main{
+        width: 30vw
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main{
+        width: 100%;
+    }
+} */
+/**********Variables**********/
+:root {
+    --menue-back: rgb(141, 141, 141);
+    --fields-back: rgb(212, 212, 212);
+    --tile-back: rgb(161, 161, 161);
+    --tile-accent: rgb(144, 144, 212);
+
+    --font-color-main: rgb(29, 29, 49);
+    --font-color-accent: rgb(25, 25, 168);
+}
