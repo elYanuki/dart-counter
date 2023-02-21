@@ -50,8 +50,8 @@ main{
     padding-top: 0.5rem; padding-bottom: 0.5rem;
     width: 100vw;
     display: flex;
-    font-size: 2rem;
-    background-color: var(--menue-back)
+    background-color: var(--menue-back);
+    height: 3.8rem;
 }
 
 #info input{
@@ -60,8 +60,17 @@ main{
     text-align: center;
 }
 
-#info div p:first-of-type{
+#info div p{
     font-size: 0.8rem;
+    transition: all .2s;
+}
+
+#info div p:nth-of-type(2){
+    font-size: 2rem;
+}
+
+#info.previewVisible div:nth-of-type(1) p:nth-of-type(2){
+    font-size: 1.5rem;
 }
 
 #info div{
@@ -77,6 +86,18 @@ main{
 #info div:nth-of-type(2){
     width: 32vw;
     justify-content: space-between;
+    height: fit-content;
+    margin-block: auto;
+}
+
+#info.previewVisible .value-preview{
+    max-height: 1rem;
+    transition: all .2s;
+}
+#info .value-preview{
+    max-height: 0;
+    overflow: hidden;
+    font-size: 1rem;
 }
 
 #step-back{
@@ -139,13 +160,21 @@ main{
     font-size: 1.2rem;
 }
 
-#subtract-div p{
-    border: 0.1rem solid black;
+#subtract{
+    border: 1px solid black;
     border-radius: 50%;
     padding: 0.3rem;
+    background-color: var(--tile-accent);
+    aspect-ratio: 1;
+    height: 1.8rem;
+    width: auto;
+    display: grid;
+    place-content: center;
+}
+
+#subtract p{
     text-align: center;
-    box-sizing: border-box;
-    background-color: rgb(139, 137, 151);;
+    vertical-align: middle;
 }
 
 /* #endregion */

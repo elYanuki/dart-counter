@@ -80,24 +80,36 @@ function changeName(){
 
 let subtract = 0
 
+function subtractValueBox(){return document.querySelector('#subtract p')}
+
 function clickNumber(value, elem){
 	elem.classList.add("selected")
 
-	if(parseInt(elem.querySelector(".counter").innerText)>= 9 ){
+	let counterValue = parseInt(elem.querySelector(".counter").innerText)
+	counterValue = counterValue + 1 > 9 ? 0 : counterValue + 1
+	
+	if(parseInt(elem.querySelector(".counter").innerText) >= 9 ){
 			elem.classList.remove("selected")
 
 			subtract -= value*9
-			document.getElementById("subtract").innerText = subtract
-
-			elem.querySelector(".counter").innerText = `0`
 	}
 	else{
-		elem.querySelector(".counter").innerText = parseInt(elem.querySelector(".counter").innerText) + 1
-		
 		subtract += value
+
 		document.getElementById("subtract-div").style.visibility = "visible"
-		document.getElementById("subtract").innerText = subtract
+		document.querySelector("#info").classList.add("previewVisible")
 	}
+
+	document.querySelector('#info .value-preview').innerText = players[editingPlayer].score.at(-1) - subtract
+		if((players[editingPlayer].score.at(-1) - subtract) < 0){
+			document.querySelector('#info .value-preview').style.color = "red"
+		}
+		else{
+			document.querySelector('#info .value-preview').style.color = "black"
+		}
+	
+	subtractValueBox().innerText = subtract
+	elem.querySelector(".counter").innerText = counterValue
 }
 
 function resetNumberTiles(){
@@ -109,7 +121,8 @@ function resetNumberTiles(){
 	}
 
 	document.getElementById("subtract-div").style.visibility = "hidden"
-	document.getElementById("subtract").style.innerText = 0
+	document.querySelector("#info").classList.remove("previewVisible")
+	subtractValueBox().innerText = 0
 
 	subtract = 0
 }
@@ -139,13 +152,17 @@ function changeScore(){
 }
 
 function stepBack(){
-	console.log("back");
-	if(players[editingPlayer].score.length>1){
+	if(players[editingPlayer].score.length<=1){
+		PopupEngine.createPopup("no score left")
+		return
+	}
+
+	PopupEngine.createPopup("sure you want to revert to previous score?", () => {
 		players[editingPlayer].score.pop()
 
 		renderPlayers()
 		editPlayer(editingPlayer)
-	}
+	})
 }
 
 //----------- rest -----------//
@@ -163,7 +180,7 @@ function renderInput(){
 					<p>25</p>
 					<p class="counter">0</p>
 					</div>
-					<div id="subtract-div"><p id="subtract">0</p></div>`
+					<div id="subtract-div"><div id="subtract"><p>0</p></div></div>`
 	document.getElementById("input").innerHTML = tileHtml
 
 	subtract = 0
@@ -199,5 +216,6 @@ document.querySelector('#name').addEventListener("keydown", (e) => {
 	if(e.key == "Enter"){
 		changeName()
 		document.querySelector('#name').blur()
+		document.querySelector('#baseScoreInput').blur()
 	}
 })
