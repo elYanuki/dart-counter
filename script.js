@@ -1,5 +1,6 @@
 let baseScore = 301
-let round = 0
+let round = 1
+let subtract = 0
 
 PopupEngine.init()
 
@@ -7,6 +8,7 @@ PopupEngine.init()
 let players = []
 let editingPlayer = 0 //id of player thats beeing edited rn
 
+renderInput()
 addPlayer()
 
 function addPlayer(){
@@ -35,10 +37,12 @@ function deletePlayer(){
 	)
 }
 
-function editPlayer(id){
+function editPlayer(id = editingPlayer){
 	editingPlayer = id
+	
+	calculateScorePreview()
 
-	document.querySelectorAll('.selected').forEach(element => {
+	document.querySelectorAll('.player.selected').forEach(element => {
 		element.classList.remove("selected")
 	});
 
@@ -48,12 +52,8 @@ function editPlayer(id){
 
 	document.getElementById(`score`).innerText = players[id].score.at(-1)
 
-	if(round > 0){
-		document.getElementById(`average`).innerText = ((baseScore - players[id].score.at(-1))/round).toFixed(1)
-	}
-	else{
-		document.getElementById(`average`).innerText = 0
-	}
+	//calulate average score
+	document.getElementById(`average`).innerText = ((baseScore - players[id].score.at(-1))/round).toFixed(1)
 }
 
 function renderPlayers(){
@@ -73,12 +73,10 @@ function renderPlayers(){
 function changeName(){
 	players[editingPlayer].name = document.querySelector('#name').value
 	renderPlayers()
-	editPlayer(editingPlayer)
+	editPlayer()
 }
 
 //----------- score change -----------//
-
-let subtract = 0
 
 function subtractValueBox(){return document.querySelector('#subtract p')}
 
@@ -100,16 +98,21 @@ function clickNumber(value, elem){
 		document.querySelector("#info").classList.add("previewVisible")
 	}
 
-	document.querySelector('#info .value-preview').innerText = players[editingPlayer].score.at(-1) - subtract
-		if((players[editingPlayer].score.at(-1) - subtract) < 0){
-			document.querySelector('#info .value-preview').style.color = "red"
-		}
-		else{
-			document.querySelector('#info .value-preview').style.color = "black"
-		}
+	calculateScorePreview()
 	
 	subtractValueBox().innerText = subtract
 	elem.querySelector(".counter").innerText = counterValue
+}
+
+function calculateScorePreview(){
+	document.querySelector('#info .value-preview').innerText = players[editingPlayer].score.at(-1) - subtract
+	
+	if((players[editingPlayer].score.at(-1) - subtract) < 0){
+		document.querySelector('#info .value-preview').style.color = "red"
+	}
+	else{
+		document.querySelector('#info .value-preview').style.color = "black"
+	}
 }
 
 function resetNumberTiles(){
@@ -129,7 +132,7 @@ function resetNumberTiles(){
 
 function changeScore(){
 	if(players[editingPlayer].score.at(-1) - subtract < 0){
-		alert("too muc")
+		PopupEngine.createPopup("Too much, score would be negative")
 		return
 	}
 
@@ -161,13 +164,12 @@ function stepBack(){
 		players[editingPlayer].score.pop()
 
 		renderPlayers()
-		editPlayer(editingPlayer)
+		editPlayer()
 	})
 }
 
 //----------- rest -----------//
 
-renderInput()
 function renderInput(){
 	let tileHtml = ""
 	for (let i = 1; i <= 20; i++) {
@@ -188,7 +190,8 @@ function renderInput(){
 
 function setBaseScore(){
 	baseScore = document.querySelector('#baseScoreInput').value
-	round = 0;
+	round = 1;
+	editPlayer()
 }
 
 function resetPlayerScores(){
