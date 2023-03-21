@@ -52,6 +52,7 @@ main{
     display: flex;
     background-color: var(--menue-back);
     height: 3.8rem;
+    user-select: none;
 }
 
 #info input{
@@ -121,6 +122,7 @@ main{
     padding: 0.5rem;
     box-sizing: border-box;
     background-color: var(--fields-back);
+    user-select: none;
 }
 
 .numberPanel{
@@ -190,6 +192,7 @@ main{
     background-color: var(--menue-back);
     justify-content: space-evenly;
     color: var(--font-color-main);
+    user-select: none;
 }
 
 #menu div{
@@ -239,6 +242,7 @@ main{
     background-color: var(--fields-back);
     padding: 0.2rem;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .player{
